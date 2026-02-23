@@ -21,6 +21,7 @@ struct ToolContext {
     let setSystemPrompt: @MainActor (String) -> Void
     let getDocumentsDirectory: () -> URL
     let addListing: @MainActor (Listing) -> Void
+    let getLastImageData: @MainActor () -> Data?
 }
 
 // MARK: - Agent Tool Protocol

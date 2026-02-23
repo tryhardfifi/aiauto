@@ -63,6 +63,9 @@ struct CreateListingTool: AgentTool {
             }
         }
 
+        // Grab the user's photo if they sent one
+        let imageData = await MainActor.run { context.getLastImageData() }
+
         let listing = Listing(
             category: category,
             sellerName: "You",
@@ -72,6 +75,7 @@ struct CreateListingTool: AgentTool {
             currency: currency,
             location: location,
             tags: tags,
+            imageData: imageData,
             availability: availability,
             capacity: capacity,
             eventDate: eventDate,

@@ -80,6 +80,10 @@ final class AppState {
             },
             addListing: { [weak self] listing in
                 self?.addListing(listing)
+            },
+            getLastImageData: { [weak self] in
+                // Find the most recent user message with an image
+                self?.chatMessages.last(where: { $0.role == .user && $0.imageData != nil })?.imageData
             }
         )
     }
