@@ -33,6 +33,27 @@ struct UseCasesView: View {
             "\"Find someone to play squash this evening\" — your agent checks who's available, matches schedules, and sets it up.",
             .green
         ),
+        (
+            "🏠",
+            "Find an Apartment",
+            "Your agent hunts for you",
+            "\"Find me a 2BR in the 11th under €1500\" — your agent scans listings, filters by your criteria, and alerts you to matches.",
+            .purple
+        ),
+        (
+            "👥",
+            "Clubs & Communities",
+            "Like subreddits, but local",
+            "Running clubs, book clubs, whatever — see photos from their meetups and your agent recommends groups that match your vibe.",
+            .teal
+        ),
+        (
+            "🎉",
+            "Discover Events",
+            "Never miss what matters",
+            "\"Any AI meetups in Paris this week?\" — your agent finds events on Luma, Meetup, and more, tailored to your interests.",
+            .indigo
+        ),
     ]
 
     var body: some View {
