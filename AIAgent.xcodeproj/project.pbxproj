@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02D0E6148C1861D83677E0D9 /* AvatarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2017FBA24DC7A76DDF39465A /* AvatarPickerView.swift */; };
+		037AACE8DD356C3B5E3E2522 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E956953736FB16CFAABED /* ProfileView.swift */; };
+		0EDC8F2D3C0B09B52C526954 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5907BD0A003CBE1DA3AF2653 /* Peer.swift */; };
+		14A1BC3173DEA02FA73380C8 /* ReadFileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64787E58D846D0622A39B97 /* ReadFileTool.swift */; };
+		21FD8D0AB5BC31371FED0BFF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAC122C5F70F5D092ED328 /* Config.swift */; };
+		2BD594BD1CFEB31A3F5E5852 /* UsernameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C56A6289AEEBECE35696A47 /* UsernameInputView.swift */; };
+		2FECA0E14FC564E28E056AFC /* P2PService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED0FD573A97C8D4B1A92DB8 /* P2PService.swift */; };
+		3E755AA4C6F9B9A46A40BD4C /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66C43E082546EC28C5CA060 /* ChatMessage.swift */; };
+		4943BCF5B824535425AF2BD4 /* AgentThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC49F757D1004E74BAF2E08 /* AgentThread.swift */; };
+		6669503A3F7982705ED592E1 /* OpenURLTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14D8291E50EF56A4F2460FC /* OpenURLTool.swift */; };
+		6DC3A3C8BFAFD02AE0725BC0 /* ReadCalendarTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */; };
+		75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */; };
+		76F5DF75733ABB1EFCE1DA99 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3791DE34CCBC90B2BDF8A /* Contact.swift */; };
+		79926A515247EE4AD2DD39E1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33331D75F02492FC526DC4A /* ChatView.swift */; };
+		7AE984C2BA969DB2246DA1F2 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62E235F5DD081B832A6DEB8 /* Secrets.swift */; };
+		7BB6A0C58398494155B93447 /* CalendarConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD264D165E9C96EB1881A37 /* CalendarConnectionView.swift */; };
+		83323E9B4F65214589568BF3 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310CE47B648B8FD5E4AC1D2D /* ContactsView.swift */; };
+		8BFF0DC496A84B68C30005DC /* GetLocationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F497968D2FB242F96E362A /* GetLocationTool.swift */; };
+		9980B5F9EF19E628D8B503D3 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C49D09007BCE6E3A80B76 /* OnboardingContainerView.swift */; };
+		A0A5C6FAB46282B041CADE8F /* AIAgentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA22984A3EF54C7B0E44B7E /* AIAgentApp.swift */; };
+		A416B927EB57C6F31D80DD16 /* ActivityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A107CBF0C08A6150BDD1347 /* ActivityListView.swift */; };
+		AC05D04644B8FC2C942165CD /* AgentTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2A4270F69F5828BCAFCD3 /* AgentTool.swift */; };
+		B2195719ABA2F24BD55A9A28 /* CreateCalendarEventTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95AF35CAE905CD7FA4DA3AF /* CreateCalendarEventTool.swift */; };
+		B839F2738F0D5BC519E506DC /* RemindersConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E8623555DFD8A6B5C8125 /* RemindersConnectionView.swift */; };
+		B92187A35E51A47BCEA924C1 /* OnboardingDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F121E46BFE0771DCF00D4D /* OnboardingDoneView.swift */; };
+		B95B36943AE6A76D0D9A0217 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136ABDBDFC3F958175B62E4D /* CalendarService.swift */; };
+		BDFDEB9A9AD1150A3C11A2A1 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47846F689B99770BB6D7FE /* LocationService.swift */; };
+		BE4CE5DBBC0D96C2502F71E9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4ABEACF2FBB296FE8201DF /* AppState.swift */; };
+		BE9D1EAF593AC30E0F356022 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F250EEA02B8CF42FB4BCC56 /* StorageService.swift */; };
+		C6CC012A268AE3BE76D921EA /* ClaudeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322FFB21F213DAF856D8E9C /* ClaudeAPIService.swift */; };
+		D2F8966E8781554379DB03BA /* WriteFileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55FA379FE09E7B394111AF /* WriteFileTool.swift */; };
+		DD2D56E9B27BC4E4ACD829B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B338A9F97D712CD3677B42 /* UserProfile.swift */; };
+		DE58512714F1357D8387C4E9 /* NotificationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDE9992D96BEC5CBA547738 /* NotificationTool.swift */; };
+		E125B6001B098A1189F98BFD /* ThreadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697E8BCC02B04DFDC08ADD91 /* ThreadDetailView.swift */; };
+		E3C4742482BFE81BA6C0F03E /* ConnectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C796300CF54D02F4EB96A16 /* ConnectionModels.swift */; };
+		ED36D2DA92BA23CFC8B73CD3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3774261CFB109AC1E4BD47BD /* MainTabView.swift */; };
+		EDDDC26BA08A51FB24F9CE7D /* SetReminderTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738531D031D003E3AA0E5FED /* SetReminderTool.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		136ABDBDFC3F958175B62E4D /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		1B55FA379FE09E7B394111AF /* WriteFileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFileTool.swift; sourceTree = "<group>"; };
+		1EC49F757D1004E74BAF2E08 /* AgentThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentThread.swift; sourceTree = "<group>"; };
+		2017FBA24DC7A76DDF39465A /* AvatarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerView.swift; sourceTree = "<group>"; };
+		22D3791DE34CCBC90B2BDF8A /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		27AAC122C5F70F5D092ED328 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		310CE47B648B8FD5E4AC1D2D /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		3774261CFB109AC1E4BD47BD /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		3A107CBF0C08A6150BDD1347 /* ActivityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListView.swift; sourceTree = "<group>"; };
+		4A47846F689B99770BB6D7FE /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		4F250EEA02B8CF42FB4BCC56 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		5907BD0A003CBE1DA3AF2653 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
+		5C796300CF54D02F4EB96A16 /* ConnectionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModels.swift; sourceTree = "<group>"; };
+		6019AEF316FA9AB14040D6E1 /* AIAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F497968D2FB242F96E362A /* GetLocationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationTool.swift; sourceTree = "<group>"; };
+		697E8BCC02B04DFDC08ADD91 /* ThreadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadDetailView.swift; sourceTree = "<group>"; };
+		719E8623555DFD8A6B5C8125 /* RemindersConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersConnectionView.swift; sourceTree = "<group>"; };
+		738531D031D003E3AA0E5FED /* SetReminderTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReminderTool.swift; sourceTree = "<group>"; };
+		76F121E46BFE0771DCF00D4D /* OnboardingDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDoneView.swift; sourceTree = "<group>"; };
+		8C4ABEACF2FBB296FE8201DF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		8D3E956953736FB16CFAABED /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		906C49D09007BCE6E3A80B76 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		9C56A6289AEEBECE35696A47 /* UsernameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameInputView.swift; sourceTree = "<group>"; };
+		9FDE9992D96BEC5CBA547738 /* NotificationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTool.swift; sourceTree = "<group>"; };
+		A66C43E082546EC28C5CA060 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		B322FFB21F213DAF856D8E9C /* ClaudeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAPIService.swift; sourceTree = "<group>"; };
+		B62E235F5DD081B832A6DEB8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		B64787E58D846D0622A39B97 /* ReadFileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileTool.swift; sourceTree = "<group>"; };
+		C14D8291E50EF56A4F2460FC /* OpenURLTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLTool.swift; sourceTree = "<group>"; };
+		C33331D75F02492FC526DC4A /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C95AF35CAE905CD7FA4DA3AF /* CreateCalendarEventTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCalendarEventTool.swift; sourceTree = "<group>"; };
+		CDA22984A3EF54C7B0E44B7E /* AIAgentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentApp.swift; sourceTree = "<group>"; };
+		CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadCalendarTool.swift; sourceTree = "<group>"; };
+		D1B338A9F97D712CD3677B42 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		EBD264D165E9C96EB1881A37 /* CalendarConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarConnectionView.swift; sourceTree = "<group>"; };
+		FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationConnectionView.swift; sourceTree = "<group>"; };
+		FED0FD573A97C8D4B1A92DB8 /* P2PService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PService.swift; sourceTree = "<group>"; };
+		FFC2A4270F69F5828BCAFCD3 /* AgentTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentTool.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		04AAC155F765AC5F50F8EFC8 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FFC2A4270F69F5828BCAFCD3 /* AgentTool.swift */,
+				C95AF35CAE905CD7FA4DA3AF /* CreateCalendarEventTool.swift */,
+				61F497968D2FB242F96E362A /* GetLocationTool.swift */,
+				9FDE9992D96BEC5CBA547738 /* NotificationTool.swift */,
+				C14D8291E50EF56A4F2460FC /* OpenURLTool.swift */,
+				CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */,
+				B64787E58D846D0622A39B97 /* ReadFileTool.swift */,
+				738531D031D003E3AA0E5FED /* SetReminderTool.swift */,
+				1B55FA379FE09E7B394111AF /* WriteFileTool.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		28535570FA4B42099224AF41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6019AEF316FA9AB14040D6E1 /* AIAgent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CCAB70CD40130B195B27650 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C4ABEACF2FBB296FE8201DF /* AppState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		33CF331286E2F31453F843DE /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2017FBA24DC7A76DDF39465A /* AvatarPickerView.swift */,
+				906C49D09007BCE6E3A80B76 /* OnboardingContainerView.swift */,
+				76F121E46BFE0771DCF00D4D /* OnboardingDoneView.swift */,
+				9C56A6289AEEBECE35696A47 /* UsernameInputView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		39BD96D4C780FA37577D218E /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				310CE47B648B8FD5E4AC1D2D /* ContactsView.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		40CAE20A563CEBFE7471818A /* AIAgent */ = {
+			isa = PBXGroup;
+			children = (
+				CDA22984A3EF54C7B0E44B7E /* AIAgentApp.swift */,
+				27AAC122C5F70F5D092ED328 /* Config.swift */,
+				B62E235F5DD081B832A6DEB8 /* Secrets.swift */,
+				9E6089CF57833B937DADD979 /* Models */,
+				7A50CAC58C6522D2153356B8 /* Services */,
+				04AAC155F765AC5F50F8EFC8 /* Tools */,
+				2CCAB70CD40130B195B27650 /* ViewModels */,
+				4CCB22B3726165E0B8DF3EA1 /* Views */,
+			);
+			path = AIAgent;
+			sourceTree = "<group>";
+		};
+		45C66A4A36277F2DBC534B17 = {
+			isa = PBXGroup;
+			children = (
+				40CAE20A563CEBFE7471818A /* AIAgent */,
+				28535570FA4B42099224AF41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4CCB22B3726165E0B8DF3EA1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3774261CFB109AC1E4BD47BD /* MainTabView.swift */,
+				D63F5849A40AB042894E0D43 /* Activity */,
+				AA228B0C2CD5F524AB1B00E7 /* Chat */,
+				39BD96D4C780FA37577D218E /* Contacts */,
+				33CF331286E2F31453F843DE /* Onboarding */,
+				600B9DEB1EA2F039F92277D0 /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		600B9DEB1EA2F039F92277D0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EBD264D165E9C96EB1881A37 /* CalendarConnectionView.swift */,
+				FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */,
+				8D3E956953736FB16CFAABED /* ProfileView.swift */,
+				719E8623555DFD8A6B5C8125 /* RemindersConnectionView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7A50CAC58C6522D2153356B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				136ABDBDFC3F958175B62E4D /* CalendarService.swift */,
+				B322FFB21F213DAF856D8E9C /* ClaudeAPIService.swift */,
+				4A47846F689B99770BB6D7FE /* LocationService.swift */,
+				FED0FD573A97C8D4B1A92DB8 /* P2PService.swift */,
+				4F250EEA02B8CF42FB4BCC56 /* StorageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9E6089CF57833B937DADD979 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EC49F757D1004E74BAF2E08 /* AgentThread.swift */,
+				A66C43E082546EC28C5CA060 /* ChatMessage.swift */,
+				5C796300CF54D02F4EB96A16 /* ConnectionModels.swift */,
+				22D3791DE34CCBC90B2BDF8A /* Contact.swift */,
+				5907BD0A003CBE1DA3AF2653 /* Peer.swift */,
+				D1B338A9F97D712CD3677B42 /* UserProfile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA228B0C2CD5F524AB1B00E7 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C33331D75F02492FC526DC4A /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D63F5849A40AB042894E0D43 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				3A107CBF0C08A6150BDD1347 /* ActivityListView.swift */,
+				697E8BCC02B04DFDC08ADD91 /* ThreadDetailView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AEBF2F03F67CC5CD53EDE118 /* AIAgent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11F11F97850C2B251886C19B /* Build configuration list for PBXNativeTarget "AIAgent" */;
+			buildPhases = (
+				891BE953CC7DEBF67E29DE8E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AIAgent;
+			packageProductDependencies = (
+			);
+			productName = AIAgent;
+			productReference = 6019AEF316FA9AB14040D6E1 /* AIAgent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1741FD409C195813930F7E13 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 597D455381E3C97CC69F730E /* Build configuration list for PBXProject "AIAgent" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 45C66A4A36277F2DBC534B17;
+			minimizedProjectReferenceProxies = 1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AEBF2F03F67CC5CD53EDE118 /* AIAgent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		891BE953CC7DEBF67E29DE8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A5C6FAB46282B041CADE8F /* AIAgentApp.swift in Sources */,
+				A416B927EB57C6F31D80DD16 /* ActivityListView.swift in Sources */,
+				4943BCF5B824535425AF2BD4 /* AgentThread.swift in Sources */,
+				AC05D04644B8FC2C942165CD /* AgentTool.swift in Sources */,
+				BE4CE5DBBC0D96C2502F71E9 /* AppState.swift in Sources */,
+				02D0E6148C1861D83677E0D9 /* AvatarPickerView.swift in Sources */,
+				7BB6A0C58398494155B93447 /* CalendarConnectionView.swift in Sources */,
+				B95B36943AE6A76D0D9A0217 /* CalendarService.swift in Sources */,
+				3E755AA4C6F9B9A46A40BD4C /* ChatMessage.swift in Sources */,
+				79926A515247EE4AD2DD39E1 /* ChatView.swift in Sources */,
+				C6CC012A268AE3BE76D921EA /* ClaudeAPIService.swift in Sources */,
+				21FD8D0AB5BC31371FED0BFF /* Config.swift in Sources */,
+				E3C4742482BFE81BA6C0F03E /* ConnectionModels.swift in Sources */,
+				76F5DF75733ABB1EFCE1DA99 /* Contact.swift in Sources */,
+				83323E9B4F65214589568BF3 /* ContactsView.swift in Sources */,
+				B2195719ABA2F24BD55A9A28 /* CreateCalendarEventTool.swift in Sources */,
+				8BFF0DC496A84B68C30005DC /* GetLocationTool.swift in Sources */,
+				75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */,
+				BDFDEB9A9AD1150A3C11A2A1 /* LocationService.swift in Sources */,
+				ED36D2DA92BA23CFC8B73CD3 /* MainTabView.swift in Sources */,
+				DE58512714F1357D8387C4E9 /* NotificationTool.swift in Sources */,
+				9980B5F9EF19E628D8B503D3 /* OnboardingContainerView.swift in Sources */,
+				B92187A35E51A47BCEA924C1 /* OnboardingDoneView.swift in Sources */,
+				6669503A3F7982705ED592E1 /* OpenURLTool.swift in Sources */,
+				2FECA0E14FC564E28E056AFC /* P2PService.swift in Sources */,
+				0EDC8F2D3C0B09B52C526954 /* Peer.swift in Sources */,
+				037AACE8DD356C3B5E3E2522 /* ProfileView.swift in Sources */,
+				6DC3A3C8BFAFD02AE0725BC0 /* ReadCalendarTool.swift in Sources */,
+				14A1BC3173DEA02FA73380C8 /* ReadFileTool.swift in Sources */,
+				B839F2738F0D5BC519E506DC /* RemindersConnectionView.swift in Sources */,
+				7AE984C2BA969DB2246DA1F2 /* Secrets.swift in Sources */,
+				EDDDC26BA08A51FB24F9CE7D /* SetReminderTool.swift in Sources */,
+				BE9D1EAF593AC30E0F356022 /* StorageService.swift in Sources */,
+				E125B6001B098A1189F98BFD /* ThreadDetailView.swift in Sources */,
+				DD2D56E9B27BC4E4ACD829B9 /* UserProfile.swift in Sources */,
+				2BD594BD1CFEB31A3F5E5852 /* UsernameInputView.swift in Sources */,
+				D2F8966E8781554379DB03BA /* WriteFileTool.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6485E842B9D3A6DD2638B423 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8KCRA84756;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Agent";
+				INFOPLIST_KEY_NSBonjourServices = "_aiagent-p2p._tcp _aiagent-p2p._udp";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Your AI agent reads your calendar to know your availability when coordinating plans.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "AI Agent reads your contact card to learn your name.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "AI Agent uses your local network to discover and communicate with nearby agents on other devices.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your AI agent uses your location to suggest nearby meeting spots.";
+				INFOPLIST_KEY_NSRemindersFullAccessUsageDescription = "Your AI agent reads your reminders to stay aware of your tasks and commitments.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiauto.aiagent;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		82B0C23486D758669DD98612 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		8F8623ECDCAFFF25E3ABA303 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		DE21A646D3285C894676615F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8KCRA84756;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Agent";
+				INFOPLIST_KEY_NSBonjourServices = "_aiagent-p2p._tcp _aiagent-p2p._udp";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Your AI agent reads your calendar to know your availability when coordinating plans.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "AI Agent reads your contact card to learn your name.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "AI Agent uses your local network to discover and communicate with nearby agents on other devices.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your AI agent uses your location to suggest nearby meeting spots.";
+				INFOPLIST_KEY_NSRemindersFullAccessUsageDescription = "Your AI agent reads your reminders to stay aware of your tasks and commitments.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiauto.aiagent;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11F11F97850C2B251886C19B /* Build configuration list for PBXNativeTarget "AIAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE21A646D3285C894676615F /* Debug */,
+				6485E842B9D3A6DD2638B423 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		597D455381E3C97CC69F730E /* Build configuration list for PBXProject "AIAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82B0C23486D758669DD98612 /* Debug */,
+				8F8623ECDCAFFF25E3ABA303 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1741FD409C195813930F7E13 /* Project object */;
+}
