@@ -30,6 +30,31 @@ struct ProfileView: View {
                     }
                 }
 
+                // Agent Activity
+                Section {
+                    NavigationLink {
+                        ActivityListView()
+                    } label: {
+                        HStack {
+                            Label("Agent Activity", systemImage: "bolt.fill")
+                            Spacer()
+                            let activeCount = appState.threads.filter({ $0.status == .negotiating }).count + appState.listings.filter({ $0.sellerId == "self" && $0.status == .active }).count
+                            if activeCount > 0 {
+                                Text("\(activeCount)")
+                                    .font(.caption2)
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(Color.blue)
+                                    .clipShape(Capsule())
+                            }
+                        }
+                    }
+                } footer: {
+                    Text("See what your agent has been up to — negotiations, listings, and more.")
+                }
+
                 // Connections
                 Section {
                     NavigationLink {

@@ -20,17 +20,11 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            ActivityListView()
-                .tabItem {
-                    Label("Activity", systemImage: "bolt.fill")
-                }
-                .tag(2)
-
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
-                .tag(3)
+                .tag(2)
         }
         .onAppear {
             appState.startP2P()
