@@ -210,7 +210,7 @@ struct TextInputBar: View {
                     .font(.title2)
                     .foregroundStyle(.blue)
             }
-            .disabled(appState.isSending)
+            
 
             // Mic button
             Button {
@@ -220,7 +220,7 @@ struct TextInputBar: View {
                     .font(.title2)
                     .foregroundStyle(.blue)
             }
-            .disabled(appState.isSending)
+            
 
             TextField("Type a message...", text: $inputText, axis: .vertical)
                 .textFieldStyle(.plain)
