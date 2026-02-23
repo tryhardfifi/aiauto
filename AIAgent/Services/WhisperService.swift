@@ -7,8 +7,10 @@ final class WhisperService: NSObject {
     var isRecording = false
     var isTranscribing = false
     var error: String?
+    var audioLevel: Float = 0  // 0-1 for waveform visualization
 
     private var audioRecorder: AVAudioRecorder?
+    private var levelTimer: Timer?
     private var recordingURL: URL {
         FileManager.default.temporaryDirectory.appendingPathComponent("voice_input.m4a")
     }
@@ -25,7 +27,6 @@ final class WhisperService: NSObject {
             return
         }
 
-        // Check mic permission
         switch AVAudioApplication.shared.recordPermission {
         case .undetermined:
             AVAudioApplication.requestRecordPermission { [weak self] allowed in
@@ -56,8 +57,22 @@ final class WhisperService: NSObject {
 
         do {
             audioRecorder = try AVAudioRecorder(url: recordingURL, settings: settings)
+            audioRecorder?.isMeteringEnabled = true
             audioRecorder?.record()
             isRecording = true
+
+            // Start level metering for waveform
+            levelTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard let self, let recorder = self.audioRecorder, recorder.isRecording else { return }
+                    recorder.updateMeters()
+                    let db = recorder.averagePower(forChannel: 0)
+                    // Convert dB (-160...0) to 0...1 range
+                    let minDb: Float = -50
+                    let normalized = max(0, min(1, (db - minDb) / (0 - minDb)))
+                    self.audioLevel = normalized
+                }
+            }
         } catch {
             self.error = "Failed to start recording: \(error.localizedDescription)"
         }
@@ -67,16 +82,17 @@ final class WhisperService: NSObject {
         guard let recorder = audioRecorder, recorder.isRecording else { return nil }
 
         recorder.stop()
+        levelTimer?.invalidate()
+        levelTimer = nil
         isRecording = false
+        audioLevel = 0
         audioRecorder = nil
 
-        // Transcribe
         isTranscribing = true
         defer { isTranscribing = false }
 
         do {
             let text = try await transcribe(fileURL: recordingURL)
-            // Clean up
             try? FileManager.default.removeItem(at: recordingURL)
             return text
         } catch {
@@ -87,8 +103,11 @@ final class WhisperService: NSObject {
 
     func cancelRecording() {
         audioRecorder?.stop()
+        levelTimer?.invalidate()
+        levelTimer = nil
         audioRecorder = nil
         isRecording = false
+        audioLevel = 0
         try? FileManager.default.removeItem(at: recordingURL)
     }
 
@@ -111,17 +130,14 @@ final class WhisperService: NSObject {
         let audioData = try Data(contentsOf: fileURL)
 
         var body = Data()
-        // Model field
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"model\"\r\n\r\n".data(using: .utf8)!)
         body.append("whisper-1\r\n".data(using: .utf8)!)
-        // File field
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"file\"; filename=\"audio.m4a\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: audio/m4a\r\n\r\n".data(using: .utf8)!)
         body.append(audioData)
         body.append("\r\n".data(using: .utf8)!)
-        // End
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
         request.httpBody = body

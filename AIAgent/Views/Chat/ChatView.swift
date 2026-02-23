@@ -60,27 +60,14 @@ struct ChatView: View {
 
                 Divider()
 
-                // Input bar
-                HStack(spacing: 8) {
-                    // Voice input button
-                    VoiceInputButton(inputText: $inputText)
-
-                    TextField("Type a message...", text: $inputText, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .lineLimit(1...5)
-                        .focused($isInputFocused)
-                        .onSubmit { sendMessage() }
-
-                    Button {
+                // Input bar — switches between text input and voice recording
+                if appState.whisperService.isRecording || appState.whisperService.isTranscribing {
+                    VoiceRecordingBar()
+                } else {
+                    TextInputBar(inputText: $inputText, isInputFocused: $isInputFocused) {
                         sendMessage()
-                    } label: {
-                        Image(systemName: "arrow.up.circle.fill")
-                            .font(.title2)
                     }
-                    .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || appState.isSending)
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -122,39 +109,117 @@ struct ChatView: View {
     }
 }
 
-// MARK: - Voice Input Button
+// MARK: - Text Input Bar
 
-struct VoiceInputButton: View {
+struct TextInputBar: View {
     @Environment(AppState.self) private var appState
     @Binding var inputText: String
+    var isInputFocused: FocusState<Bool>.Binding
+    let onSend: () -> Void
 
     var body: some View {
-        let whisper = appState.whisperService
-
-        Button {
-            if whisper.isRecording {
-                Task {
-                    if let text = await whisper.stopRecording() {
-                        inputText = text
-                    }
-                }
-            } else {
-                whisper.startRecording()
+        HStack(spacing: 8) {
+            // Mic button
+            Button {
+                appState.whisperService.startRecording()
+            } label: {
+                Image(systemName: "mic.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(.blue)
             }
-        } label: {
-            Group {
-                if whisper.isTranscribing {
-                    ProgressView()
-                        .scaleEffect(0.8)
-                } else {
-                    Image(systemName: whisper.isRecording ? "stop.circle.fill" : "mic.circle.fill")
+            .disabled(appState.isSending)
+
+            TextField("Type a message...", text: $inputText, axis: .vertical)
+                .textFieldStyle(.plain)
+                .lineLimit(1...5)
+                .focused(isInputFocused)
+                .onSubmit { onSend() }
+
+            Button {
+                onSend()
+            } label: {
+                Image(systemName: "arrow.up.circle.fill")
+                    .font(.title2)
+            }
+            .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || appState.isSending)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+    }
+}
+
+// MARK: - Voice Recording Bar (with waveform)
+
+struct VoiceRecordingBar: View {
+    @Environment(AppState.self) private var appState
+
+    var body: some View {
+        HStack(spacing: 12) {
+            if appState.whisperService.isTranscribing {
+                // Transcribing state
+                ProgressView()
+                    .scaleEffect(0.9)
+                Text("Transcribing...")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Spacer()
+            } else {
+                // Recording state
+                Button {
+                    appState.whisperService.cancelRecording()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
                         .font(.title2)
-                        .foregroundStyle(whisper.isRecording ? .red : .blue)
-                        .symbolEffect(.pulse, isActive: whisper.isRecording)
+                        .foregroundStyle(.gray)
+                }
+
+                // Waveform
+                AudioWaveformView(level: appState.whisperService.audioLevel)
+                    .frame(height: 32)
+
+                // Stop & send
+                Button {
+                    Task {
+                        if let text = await appState.whisperService.stopRecording() {
+                            await appState.sendMessage(text)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(.blue)
                 }
             }
         }
-        .disabled(whisper.isTranscribing || appState.isSending)
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .background(
+            appState.whisperService.isRecording ?
+                Color.red.opacity(0.05) : Color.clear
+        )
+    }
+}
+
+// MARK: - Audio Waveform View
+
+struct AudioWaveformView: View {
+    let level: Float
+    @State private var levels: [CGFloat] = Array(repeating: 0.05, count: 30)
+
+    var body: some View {
+        HStack(spacing: 2) {
+            ForEach(0..<levels.count, id: \.self) { index in
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(Color.blue.opacity(0.7))
+                    .frame(width: 3, height: max(3, levels[index] * 32))
+            }
+        }
+        .onChange(of: level) { _, newLevel in
+            withAnimation(.linear(duration: 0.05)) {
+                levels.removeFirst()
+                levels.append(CGFloat(newLevel))
+            }
+        }
     }
 }
 
