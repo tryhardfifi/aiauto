@@ -363,6 +363,7 @@ struct ChatBubble: View {
                         if !message.content.isEmpty &&
                            message.content != "Here's a photo. What do you see? If it looks like something I want to sell, create a listing for it." {
                             Text(message.content)
+                                .textSelection(.enabled)
                                 .padding(12)
                                 .background(Color.blue)
                                 .foregroundStyle(.white)
@@ -374,6 +375,7 @@ struct ChatBubble: View {
                         .font(.title3)
 
                     Text(LocalizedStringKey(message.content))
+                        .textSelection(.enabled)
                         .padding(12)
                         .background(Color(.systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 16))

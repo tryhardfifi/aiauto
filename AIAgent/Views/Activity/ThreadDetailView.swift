@@ -93,6 +93,7 @@ struct NegotiationBubble: View {
                 .foregroundStyle(.secondary)
 
             Text(cleanContent)
+                .textSelection(.enabled)
                 .padding(12)
                 .background(isMyAgent ? Color.blue.opacity(0.12) : Color(.systemGray6))
                 .clipShape(RoundedRectangle(cornerRadius: 12))

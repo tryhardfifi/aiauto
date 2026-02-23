@@ -745,11 +745,21 @@ final class AppState {
         If negotiations fail completely, include [FAILED] at the very end of your message.
         """
 
+        // Build listing context for the contact
+        let contactListings = listings.filter { $0.sellerId == contact.id && $0.status == .active }
+        let listingsContext = contactListings.isEmpty ? "" : """
+
+        Your listings for sale/available:
+        \(contactListings.map { "- \($0.summary)" }.joined(separator: "\n"))
+        """
+
         let targetAgentSystem = """
         You are an AI agent representing \(contact.name). \(contact.persona)
         You are negotiating with another person's agent.
-        Respond based on your user's known preferences and availability.
-        Be helpful but realistic — don't agree to everything blindly. Suggest specific times and details.
+        \(listingsContext)
+        Respond based on your user's known preferences, availability, AND their active listings above.
+        You can discuss, negotiate prices, and make deals on ANY of your user's listings — not just one topic.
+        Be helpful but realistic — negotiate fairly. Suggest specific times and details.
         Keep messages to 2-3 sentences max.
         When you accept a proposal, include [AGREED] at the very end of your message.
         When you reject definitively, include [FAILED] at the very end of your message.
