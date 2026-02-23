@@ -85,6 +85,7 @@ struct ExploreView: View {
                 .padding(.vertical)
             }
             .navigationTitle("Explore")
+            .navigationBarTitleDisplayMode(.inline)
             .sheet(item: $selectedListing) { listing in
                 ListingDetailSheet(listing: listing)
             }

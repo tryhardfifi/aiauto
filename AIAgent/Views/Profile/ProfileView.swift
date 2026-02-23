@@ -142,6 +142,7 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("Profile")
+            .navigationBarTitleDisplayMode(.inline)
             .alert("Reset Everything?", isPresented: $showResetConfirmation) {
                 Button("Reset", role: .destructive) {
                     appState.clearAllData()
