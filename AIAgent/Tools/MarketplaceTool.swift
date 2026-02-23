@@ -80,11 +80,7 @@ struct CreateListingTool: AgentTool {
         )
 
         await MainActor.run {
-            NotificationCenter.default.post(
-                name: .listingCreated,
-                object: nil,
-                userInfo: ["listing": listing]
-            )
+            context.addListing(listing)
         }
 
         var confirmParts = ["\(category.emoji) Created \(category.displayName): \"\(title)\""]
@@ -335,8 +331,4 @@ struct DiscoverPeopleTool: AgentTool {
     }
 }
 
-// MARK: - Notification Names
-
-extension Notification.Name {
-    static let listingCreated = Notification.Name("listingCreated")
-}
+// end of file

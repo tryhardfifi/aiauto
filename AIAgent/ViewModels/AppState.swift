@@ -62,15 +62,6 @@ final class AppState {
         toolRegistry.register(MyListingsTool())
         toolRegistry.register(BookServiceTool())
         toolRegistry.register(DiscoverPeopleTool())
-
-        // Listen for listing creation from tools
-        NotificationCenter.default.addObserver(forName: .listingCreated, object: nil, queue: .main) { [weak self] notif in
-            guard let self, let listing = notif.userInfo?["listing"] as? Listing else { return }
-            Task { @MainActor in
-                self.listings.append(listing)
-                self.storage.saveListings(self.listings)
-            }
-        }
     }
 
     private var toolContext: ToolContext {
@@ -86,6 +77,9 @@ final class AppState {
             },
             getDocumentsDirectory: {
                 FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            },
+            addListing: { [weak self] listing in
+                self?.addListing(listing)
             }
         )
     }
@@ -303,6 +297,13 @@ final class AppState {
         selectedTab = 0
     }
 
+    // MARK: - Listing Management
+
+    func addListing(_ listing: Listing) {
+        listings.append(listing)
+        storage.saveListings(listings)
+    }
+
     // MARK: - Contact Management
 
     func addContact(_ contact: Contact) {
@@ -342,13 +343,15 @@ final class AppState {
     func clearAllData() {
         chatMessages = []
         threads = []
+        contacts = []
+        listings = []
         userProfile = nil
         storage.saveChatMessages(chatMessages)
         storage.saveThreads(threads)
-        if let profile = storage.loadProfile() {
-            _ = profile
-        }
+        storage.saveContacts(contacts)
+        storage.saveListings(listings)
         UserDefaults.standard.removeObject(forKey: "userProfile")
+        UserDefaults.standard.removeObject(forKey: "listings")
     }
 
     // MARK: - Prompt Evolution

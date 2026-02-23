@@ -20,6 +20,7 @@ struct ToolContext {
     let getSystemPrompt: @MainActor () -> String
     let setSystemPrompt: @MainActor (String) -> Void
     let getDocumentsDirectory: () -> URL
+    let addListing: @MainActor (Listing) -> Void
 }
 
 // MARK: - Agent Tool Protocol
