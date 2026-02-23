@@ -60,6 +60,8 @@ final class AppState {
         toolRegistry.register(SearchListingsTool())
         toolRegistry.register(RemoveListingTool())
         toolRegistry.register(MyListingsTool())
+        toolRegistry.register(BookServiceTool())
+        toolRegistry.register(DiscoverPeopleTool())
 
         // Listen for listing creation from tools
         NotificationCenter.default.addObserver(forName: .listingCreated, object: nil, queue: .main) { [weak self] notif in
@@ -120,7 +122,7 @@ final class AppState {
         let activeListings = listings.filter { $0.status == .active }
         if !activeListings.isEmpty {
             let listingsSummary = activeListings.map { l in
-                "• \(l.title) — \(String(format: "%.2f %@", l.price, l.currency)) (by \(l.sellerName))"
+                "• \(l.summary)"
             }.joined(separator: "\n")
             prompt += "\n\nActive marketplace listings:\n\(listingsSummary)"
         }
