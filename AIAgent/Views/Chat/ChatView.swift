@@ -114,10 +114,16 @@ struct ChatView: View {
             .onChange(of: selectedPhoto) { _, newItem in
                 Task {
                     if let newItem, let data = try? await newItem.loadTransferable(type: Data.self) {
-                        // Compress to JPEG
-                        if let uiImage = UIImage(data: data),
-                           let jpeg = uiImage.jpegData(compressionQuality: 0.7) {
-                            pendingImageData = jpeg
+                        // Resize + compress for vision API (max 512px side)
+                        if let uiImage = UIImage(data: data) {
+                            let maxDim: CGFloat = 512
+                            let scale = min(maxDim / uiImage.size.width, maxDim / uiImage.size.height, 1.0)
+                            let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
+                            let renderer = UIGraphicsImageRenderer(size: newSize)
+                            let resized = renderer.image { _ in
+                                uiImage.draw(in: CGRect(origin: .zero, size: newSize))
+                            }
+                            pendingImageData = resized.jpegData(compressionQuality: 0.5)
                         }
                         selectedPhoto = nil
                     }

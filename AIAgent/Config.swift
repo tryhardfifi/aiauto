@@ -7,7 +7,7 @@ enum Config {
         if !saved.isEmpty { return saved }
         return Secrets.openAIKey
     }
-    static let model = "gpt-4o"
+    static let model = "gpt-4o-mini"
     static let maxChatHistory = 20
     static let maxNegotiationRounds = 3
 }

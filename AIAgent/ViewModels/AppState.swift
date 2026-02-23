@@ -257,10 +257,12 @@ final class AppState {
 
     private func buildAPIMessages() -> [LLMService.Message] {
         let recentMessages = Array(chatMessages.suffix(Config.maxChatHistory))
+        // Only include image data for the LAST user message (avoid re-sending large base64 every turn)
+        let lastUserWithImage = recentMessages.last(where: { $0.role == .user && $0.imageData != nil })?.id
         return recentMessages.compactMap { msg -> LLMService.Message? in
             switch msg.role {
             case .user:
-                if let imageData = msg.imageData {
+                if let imageData = msg.imageData, msg.id == lastUserWithImage {
                     let base64 = imageData.base64EncodedString()
                     return LLMService.Message(role: "user", content: msg.content, imageBase64: base64)
                 }
