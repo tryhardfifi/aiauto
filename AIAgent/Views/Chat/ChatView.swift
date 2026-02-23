@@ -374,11 +374,26 @@ struct ChatBubble: View {
                     Text(agentAvatar)
                         .font(.title3)
 
-                    Text(LocalizedStringKey(message.content))
-                        .textSelection(.enabled)
-                        .padding(12)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    VStack(alignment: .leading, spacing: 8) {
+                        // Parse message for listing references
+                        let parts = parseListingReferences(message.content)
+                        ForEach(Array(parts.enumerated()), id: \.offset) { _, part in
+                            switch part {
+                            case .text(let text):
+                                if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                    Text(LocalizedStringKey(text))
+                                        .textSelection(.enabled)
+                                }
+                            case .listing(let listing):
+                                ListingPreviewCard(listing: listing) {
+                                    onTapListing?(listing.title)
+                                }
+                            }
+                        }
+                    }
+                    .padding(12)
+                    .background(Color(.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
 
                     Spacer(minLength: 60)
                 }
@@ -415,6 +430,129 @@ struct TypingIndicator: View {
         }
         .onReceive(timer) { _ in
             phase += 1
+        }
+    }
+}
+
+// MARK: - Listing Reference Parsing
+
+enum MessagePart {
+    case text(String)
+    case listing(Listing)
+}
+
+func parseListingReferences(_ content: String) -> [MessagePart] {
+    let pattern = "\\[\\[listing:(.+?)\\]\\]"
+    guard let regex = try? NSRegularExpression(pattern: pattern) else {
+        return [.text(content)]
+    }
+
+    let nsContent = content as NSString
+    let matches = regex.matches(in: content, range: NSRange(location: 0, length: nsContent.length))
+
+    if matches.isEmpty { return [.text(content)] }
+
+    var parts: [MessagePart] = []
+    var lastEnd = 0
+
+    // Get listings from UserDefaults
+    let allListings: [Listing] = {
+        guard let data = UserDefaults.standard.data(forKey: "listings"),
+              let listings = try? JSONDecoder().decode([Listing].self, from: data) else { return [] }
+        return listings
+    }()
+
+    for match in matches {
+        let matchRange = match.range
+        let titleRange = match.range(at: 1)
+
+        // Text before this match
+        if matchRange.location > lastEnd {
+            let textRange = NSRange(location: lastEnd, length: matchRange.location - lastEnd)
+            parts.append(.text(nsContent.substring(with: textRange)))
+        }
+
+        // Find matching listing
+        let title = nsContent.substring(with: titleRange).trimmingCharacters(in: .whitespaces)
+        if let listing = allListings.first(where: { $0.title.lowercased().contains(title.lowercased()) || title.lowercased().contains($0.title.lowercased()) }) {
+            parts.append(.listing(listing))
+        } else {
+            // No match found, show as text
+            parts.append(.text(title))
+        }
+
+        lastEnd = matchRange.location + matchRange.length
+    }
+
+    // Remaining text
+    if lastEnd < nsContent.length {
+        parts.append(.text(nsContent.substring(from: lastEnd)))
+    }
+
+    return parts
+}
+
+// MARK: - Listing Preview Card
+
+struct ListingPreviewCard: View {
+    let listing: Listing
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            HStack(spacing: 10) {
+                // Image or emoji
+                if let imageData = listing.imageData, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 56, height: 56)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                } else {
+                    Text(listing.category.emoji)
+                        .font(.title2)
+                        .frame(width: 56, height: 56)
+                        .background(Color(.systemGray5))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(listing.title)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+
+                    HStack(spacing: 6) {
+                        if let price = listing.price {
+                            Text(String(format: "%.0f %@", price, listing.currency))
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.blue)
+                        }
+                        Text(listing.sellerName)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    if let location = listing.location {
+                        Label(location, systemImage: "mappin")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(8)
+            .background(Color(.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(color: .black.opacity(0.08), radius: 2, y: 1)
         }
     }
 }
