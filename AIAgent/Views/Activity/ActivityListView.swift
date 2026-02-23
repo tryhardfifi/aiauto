@@ -162,6 +162,7 @@ struct StatusBadge: View {
 
 struct ListingDetailSheet: View {
     let listing: Listing
+    @Environment(AppState.self) private var appState
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -276,6 +277,25 @@ struct ListingDetailSheet: View {
                             .foregroundStyle(.tertiary)
                     }
                     .padding(.top, 8)
+
+                    // Chat about this button
+                    if listing.sellerId != "self" {
+                        Button {
+                            let priceStr = listing.price.map { String(format: "%.0f %@", $0, listing.currency) } ?? "no price listed"
+                            appState.pendingChatMessage = "I'm interested in \"\(listing.title)\" by \(listing.sellerName) (\(priceStr)). Can you help me with this?"
+                            appState.selectedTab = 0
+                            dismiss()
+                        } label: {
+                            Label("Chat about this", systemImage: "bubble.left.fill")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                        }
+                        .padding(.top, 8)
+                    }
                 }
                 .padding()
             }
