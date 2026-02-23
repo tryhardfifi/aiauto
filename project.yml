@@ -28,6 +28,7 @@ targets:
         INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: "Your AI agent reads your calendar to know your availability when coordinating plans."
         INFOPLIST_KEY_NSRemindersFullAccessUsageDescription: "Your AI agent reads your reminders to stay aware of your tasks and commitments."
         INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Your AI agent uses your location to suggest nearby meeting spots."
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "AI Agent uses your microphone for voice input via Whisper transcription."
         INFOPLIST_KEY_NSLocalNetworkUsageDescription: "AI Agent uses your local network to discover and communicate with nearby agents on other devices."
         INFOPLIST_KEY_NSBonjourServices:
           - _aiagent-p2p._tcp

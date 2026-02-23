@@ -61,7 +61,10 @@ struct ChatView: View {
                 Divider()
 
                 // Input bar
-                HStack(spacing: 12) {
+                HStack(spacing: 8) {
+                    // Voice input button
+                    VoiceInputButton(inputText: $inputText)
+
                     TextField("Type a message...", text: $inputText, axis: .vertical)
                         .textFieldStyle(.plain)
                         .lineLimit(1...5)
@@ -116,6 +119,42 @@ struct ChatView: View {
                 proxy.scrollTo(last.id, anchor: .bottom)
             }
         }
+    }
+}
+
+// MARK: - Voice Input Button
+
+struct VoiceInputButton: View {
+    @Environment(AppState.self) private var appState
+    @Binding var inputText: String
+
+    var body: some View {
+        let whisper = appState.whisperService
+
+        Button {
+            if whisper.isRecording {
+                Task {
+                    if let text = await whisper.stopRecording() {
+                        inputText = text
+                    }
+                }
+            } else {
+                whisper.startRecording()
+            }
+        } label: {
+            Group {
+                if whisper.isTranscribing {
+                    ProgressView()
+                        .scaleEffect(0.8)
+                } else {
+                    Image(systemName: whisper.isRecording ? "stop.circle.fill" : "mic.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(whisper.isRecording ? .red : .blue)
+                        .symbolEffect(.pulse, isActive: whisper.isRecording)
+                }
+            }
+        }
+        .disabled(whisper.isTranscribing || appState.isSending)
     }
 }
 

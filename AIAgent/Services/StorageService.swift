@@ -9,6 +9,7 @@ final class StorageService {
         static let userProfile = "userProfile"
         static let chatMessages = "chatMessages"
         static let threads = "threads"
+        static let contacts = "contacts"
         static let apiKey = "openAIAPIKey"
         static let availabilityPreferences = "availabilityPreferences"
     }
@@ -50,6 +51,24 @@ final class StorageService {
     func loadThreads() -> [AgentThread] {
         guard let data = defaults.data(forKey: Keys.threads) else { return [] }
         return (try? decoder.decode([AgentThread].self, from: data)) ?? []
+    }
+
+    // MARK: - Contacts
+
+    func saveContacts(_ contacts: [Contact]) {
+        if let data = try? encoder.encode(contacts) {
+            defaults.set(data, forKey: Keys.contacts)
+        }
+    }
+
+    func loadContacts() -> [Contact] {
+        guard let data = defaults.data(forKey: Keys.contacts) else {
+            // First launch — seed defaults
+            let defaults = Contact.defaultContacts
+            saveContacts(defaults)
+            return defaults
+        }
+        return (try? decoder.decode([Contact].self, from: data)) ?? Contact.defaultContacts
     }
 
     // MARK: - API Key

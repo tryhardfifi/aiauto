@@ -5,7 +5,7 @@ import UIKit
 @Observable
 final class AppState {
     var userProfile: UserProfile?
-    var contacts: [Contact] = Contact.fakeContacts
+    var contacts: [Contact] = []
     var chatMessages: [ChatMessage] = []
     var threads: [AgentThread] = []
     var isSending = false
@@ -18,6 +18,7 @@ final class AppState {
     var locationConnectionStatus: LocationConnectionStatus = .notConnected
 
     let p2pService = P2PService()
+    let whisperService = WhisperService()
 
     var isOnboarded: Bool { userProfile != nil }
 
@@ -36,6 +37,7 @@ final class AppState {
         userProfile = storage.loadProfile()
         chatMessages = storage.loadChatMessages()
         threads = storage.loadThreads()
+        contacts = storage.loadContacts()
         apiKey = storage.loadAPIKey()
         if apiKey.isEmpty && !Secrets.openAIKey.isEmpty {
             apiKey = Secrets.openAIKey
@@ -273,6 +275,25 @@ final class AppState {
     func reachOutToPeer(_ peer: Peer) {
         pendingChatMessage = "Reach out to \(peer.username)"
         selectedTab = 0
+    }
+
+    // MARK: - Contact Management
+
+    func addContact(_ contact: Contact) {
+        contacts.append(contact)
+        storage.saveContacts(contacts)
+    }
+
+    func updateContact(_ contact: Contact) {
+        if let idx = contacts.firstIndex(where: { $0.id == contact.id }) {
+            contacts[idx] = contact
+            storage.saveContacts(contacts)
+        }
+    }
+
+    func deleteContacts(at offsets: IndexSet) {
+        contacts.remove(atOffsets: offsets)
+        storage.saveContacts(contacts)
     }
 
     // MARK: - Settings
