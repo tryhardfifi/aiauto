@@ -17,6 +17,7 @@
 		3E755AA4C6F9B9A46A40BD4C /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66C43E082546EC28C5CA060 /* ChatMessage.swift */; };
 		4943BCF5B824535425AF2BD4 /* AgentThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC49F757D1004E74BAF2E08 /* AgentThread.swift */; };
 		565ECB6893AED6247EE61697 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B85C2C22FAE9448B2340E1F /* Listing.swift */; };
+		604680872EF5EEA9414F8432 /* UseCasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF19F2DD994FCF7014E74F28 /* UseCasesView.swift */; };
 		6669503A3F7982705ED592E1 /* OpenURLTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14D8291E50EF56A4F2460FC /* OpenURLTool.swift */; };
 		6DC3A3C8BFAFD02AE0725BC0 /* ReadCalendarTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */; };
 		75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */; };
@@ -78,6 +79,7 @@
 		9FDE9992D96BEC5CBA547738 /* NotificationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTool.swift; sourceTree = "<group>"; };
 		A66C43E082546EC28C5CA060 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		A81ECEB56E1B044C268010CB /* WhisperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperService.swift; sourceTree = "<group>"; };
+		AF19F2DD994FCF7014E74F28 /* UseCasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasesView.swift; sourceTree = "<group>"; };
 		B322FFB21F213DAF856D8E9C /* ClaudeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAPIService.swift; sourceTree = "<group>"; };
 		B62E235F5DD081B832A6DEB8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		B64787E58D846D0622A39B97 /* ReadFileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileTool.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				2017FBA24DC7A76DDF39465A /* AvatarPickerView.swift */,
 				906C49D09007BCE6E3A80B76 /* OnboardingContainerView.swift */,
 				76F121E46BFE0771DCF00D4D /* OnboardingDoneView.swift */,
+				AF19F2DD994FCF7014E74F28 /* UseCasesView.swift */,
 				9C56A6289AEEBECE35696A47 /* UsernameInputView.swift */,
 			);
 			path = Onboarding;
@@ -331,6 +334,7 @@
 				EDDDC26BA08A51FB24F9CE7D /* SetReminderTool.swift in Sources */,
 				BE9D1EAF593AC30E0F356022 /* StorageService.swift in Sources */,
 				E125B6001B098A1189F98BFD /* ThreadDetailView.swift in Sources */,
+				604680872EF5EEA9414F8432 /* UseCasesView.swift in Sources */,
 				DD2D56E9B27BC4E4ACD829B9 /* UserProfile.swift in Sources */,
 				2BD594BD1CFEB31A3F5E5852 /* UsernameInputView.swift in Sources */,
 				C1711420FD6E9E3604A22D62 /* WhisperService.swift in Sources */,

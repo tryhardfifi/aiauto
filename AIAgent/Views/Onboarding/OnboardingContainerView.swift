@@ -15,13 +15,18 @@ struct OnboardingContainerView: View {
         ZStack {
             switch step {
             case 0:
-                AvatarPickerView(selectedAvatar: $selectedAvatar) {
+                UseCasesView {
                     step = 1
                 }
                 .transition(forwardTransition)
             case 1:
-                UsernameInputView(username: $username) {
+                AvatarPickerView(selectedAvatar: $selectedAvatar) {
                     step = 2
+                }
+                .transition(forwardTransition)
+            case 2:
+                UsernameInputView(username: $username) {
+                    step = 3
                 }
                 .transition(forwardTransition)
             default:
