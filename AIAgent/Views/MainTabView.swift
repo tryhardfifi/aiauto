@@ -14,17 +14,23 @@ struct MainTabView: View {
                 }
                 .tag(0)
 
+            ExploreView()
+                .tabItem {
+                    Label("Explore", systemImage: "sparkle.magnifyingglass")
+                }
+                .tag(1)
+
             ActivityListView()
                 .tabItem {
                     Label("Activity", systemImage: "bolt.fill")
                 }
-                .tag(1)
+                .tag(2)
 
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
-                .tag(2)
+                .tag(3)
         }
         .onAppear {
             appState.startP2P()

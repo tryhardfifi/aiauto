@@ -20,6 +20,7 @@
 		604680872EF5EEA9414F8432 /* UseCasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF19F2DD994FCF7014E74F28 /* UseCasesView.swift */; };
 		6669503A3F7982705ED592E1 /* OpenURLTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14D8291E50EF56A4F2460FC /* OpenURLTool.swift */; };
 		6DC3A3C8BFAFD02AE0725BC0 /* ReadCalendarTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */; };
+		74BED6C442E8B11B248CF2EC /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7005F2AC23F5A91E79CE /* ExploreView.swift */; };
 		75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */; };
 		76F5DF75733ABB1EFCE1DA99 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3791DE34CCBC90B2BDF8A /* Contact.swift */; };
 		79926A515247EE4AD2DD39E1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33331D75F02492FC526DC4A /* ChatView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		087B7005F2AC23F5A91E79CE /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		136ABDBDFC3F958175B62E4D /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		1B55FA379FE09E7B394111AF /* WriteFileTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFileTool.swift; sourceTree = "<group>"; };
 		1B85C2C22FAE9448B2340E1F /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				D63F5849A40AB042894E0D43 /* Activity */,
 				AA228B0C2CD5F524AB1B00E7 /* Chat */,
 				39BD96D4C780FA37577D218E /* Contacts */,
+				8B26A2BF2551591759F9CE56 /* Explore */,
 				33CF331286E2F31453F843DE /* Onboarding */,
 				600B9DEB1EA2F039F92277D0 /* Profile */,
 			);
@@ -207,6 +210,14 @@
 				A81ECEB56E1B044C268010CB /* WhisperService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8B26A2BF2551591759F9CE56 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				087B7005F2AC23F5A91E79CE /* ExploreView.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 		9E6089CF57833B937DADD979 /* Models */ = {
@@ -314,6 +325,7 @@
 				76F5DF75733ABB1EFCE1DA99 /* Contact.swift in Sources */,
 				83323E9B4F65214589568BF3 /* ContactsView.swift in Sources */,
 				B2195719ABA2F24BD55A9A28 /* CreateCalendarEventTool.swift in Sources */,
+				74BED6C442E8B11B248CF2EC /* ExploreView.swift in Sources */,
 				8BFF0DC496A84B68C30005DC /* GetLocationTool.swift in Sources */,
 				565ECB6893AED6247EE61697 /* Listing.swift in Sources */,
 				75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */,
