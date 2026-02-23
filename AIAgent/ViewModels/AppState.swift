@@ -164,10 +164,10 @@ final class AppState {
 
     // MARK: - Chat
 
-    func sendMessage(_ text: String) async {
+    func sendMessage(_ text: String, imageData: Data? = nil) async {
         guard userProfile != nil else { return }
 
-        let userMessage = ChatMessage(role: .user, content: text)
+        let userMessage = ChatMessage(role: .user, content: text, imageData: imageData)
         chatMessages.append(userMessage)
         storage.saveChatMessages(chatMessages)
 
@@ -256,11 +256,15 @@ final class AppState {
         return recentMessages.compactMap { msg -> LLMService.Message? in
             switch msg.role {
             case .user:
+                if let imageData = msg.imageData {
+                    let base64 = imageData.base64EncodedString()
+                    return LLMService.Message(role: "user", content: msg.content, imageBase64: base64)
+                }
                 return LLMService.Message(role: "user", content: msg.content)
             case .agent:
                 return LLMService.Message(role: "assistant", content: msg.content)
             case .system:
-                return nil // Don't send system chat messages to API
+                return nil
             }
         }
     }

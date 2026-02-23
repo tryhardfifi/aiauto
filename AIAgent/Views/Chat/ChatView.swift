@@ -1,8 +1,11 @@
+import PhotosUI
 import SwiftUI
 
 struct ChatView: View {
     @Environment(AppState.self) private var appState
     @State private var inputText = ""
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var pendingImageData: Data?
     @FocusState private var isInputFocused: Bool
 
     var body: some View {
@@ -17,7 +20,7 @@ struct ChatView: View {
                                         .font(.system(size: 64))
                                     Text("Hey! I'm your AI agent.")
                                         .font(.headline)
-                                    Text("Ask me anything, or tell me to reach out to one of your contacts.")
+                                    Text("Ask me anything, send a photo to sell something, or reach out to a contact.")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                         .multilineTextAlignment(.center)
@@ -60,11 +63,21 @@ struct ChatView: View {
 
                 Divider()
 
-                // Input bar — switches between text input and voice recording
+                // Pending image preview
+                if pendingImageData != nil {
+                    PendingImageBar(imageData: $pendingImageData)
+                }
+
+                // Input bar
                 if appState.whisperService.isRecording || appState.whisperService.isTranscribing {
                     VoiceRecordingBar()
                 } else {
-                    TextInputBar(inputText: $inputText, isInputFocused: $isInputFocused) {
+                    TextInputBar(
+                        inputText: $inputText,
+                        isInputFocused: $isInputFocused,
+                        selectedPhoto: $selectedPhoto,
+                        pendingImageData: $pendingImageData
+                    ) {
                         sendMessage()
                     }
                 }
@@ -87,16 +100,41 @@ struct ChatView: View {
                     isInputFocused = true
                 }
             }
+            .onChange(of: selectedPhoto) { _, newItem in
+                Task {
+                    if let newItem, let data = try? await newItem.loadTransferable(type: Data.self) {
+                        // Compress to JPEG
+                        if let uiImage = UIImage(data: data),
+                           let jpeg = uiImage.jpegData(compressionQuality: 0.7) {
+                            pendingImageData = jpeg
+                        }
+                        selectedPhoto = nil
+                    }
+                }
+            }
         }
     }
 
     private func sendMessage() {
         let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty else { return }
+        let imageData = pendingImageData
+
+        // If there's an image but no text, use a default prompt
+        let finalText: String
+        if let _ = imageData, text.isEmpty {
+            finalText = "Here's a photo. What do you see? If it looks like something I want to sell, create a listing for it."
+        } else if let _ = imageData {
+            finalText = text
+        } else {
+            guard !text.isEmpty else { return }
+            finalText = text
+        }
+
         inputText = ""
+        pendingImageData = nil
 
         Task {
-            await appState.sendMessage(text)
+            await appState.sendMessage(finalText, imageData: imageData)
         }
     }
 
@@ -109,16 +147,60 @@ struct ChatView: View {
     }
 }
 
+// MARK: - Pending Image Bar
+
+struct PendingImageBar: View {
+    @Binding var imageData: Data?
+
+    var body: some View {
+        if let data = imageData, let uiImage = UIImage(data: data) {
+            HStack {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+
+                Text("Photo attached")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+
+                Button {
+                    imageData = nil
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.gray)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 4)
+            .background(Color(.systemGray6))
+        }
+    }
+}
+
 // MARK: - Text Input Bar
 
 struct TextInputBar: View {
     @Environment(AppState.self) private var appState
     @Binding var inputText: String
     var isInputFocused: FocusState<Bool>.Binding
+    @Binding var selectedPhoto: PhotosPickerItem?
+    @Binding var pendingImageData: Data?
     let onSend: () -> Void
 
     var body: some View {
         HStack(spacing: 8) {
+            // Photo picker
+            PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                Image(systemName: "photo.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(.blue)
+            }
+            .disabled(appState.isSending)
+
             // Mic button
             Button {
                 appState.whisperService.startRecording()
@@ -141,14 +223,17 @@ struct TextInputBar: View {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.title2)
             }
-            .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || appState.isSending)
+            .disabled(
+                (inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && pendingImageData == nil) ||
+                appState.isSending
+            )
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
     }
 }
 
-// MARK: - Voice Recording Bar (with waveform)
+// MARK: - Voice Recording Bar
 
 struct VoiceRecordingBar: View {
     @Environment(AppState.self) private var appState
@@ -156,7 +241,6 @@ struct VoiceRecordingBar: View {
     var body: some View {
         HStack(spacing: 12) {
             if appState.whisperService.isTranscribing {
-                // Transcribing state
                 ProgressView()
                     .scaleEffect(0.9)
                 Text("Transcribing...")
@@ -164,7 +248,6 @@ struct VoiceRecordingBar: View {
                     .foregroundStyle(.secondary)
                 Spacer()
             } else {
-                // Recording state
                 Button {
                     appState.whisperService.cancelRecording()
                 } label: {
@@ -173,11 +256,9 @@ struct VoiceRecordingBar: View {
                         .foregroundStyle(.gray)
                 }
 
-                // Waveform
                 AudioWaveformView(level: appState.whisperService.audioLevel)
                     .frame(height: 32)
 
-                // Stop & send
                 Button {
                     Task {
                         if let text = await appState.whisperService.stopRecording() {
@@ -193,10 +274,7 @@ struct VoiceRecordingBar: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .background(
-            appState.whisperService.isRecording ?
-                Color.red.opacity(0.05) : Color.clear
-        )
+        .background(Color.red.opacity(0.05))
     }
 }
 
@@ -244,11 +322,25 @@ struct ChatBubble: View {
                 if message.role == .user {
                     Spacer(minLength: 60)
 
-                    Text(message.content)
-                        .padding(12)
-                        .background(Color.blue)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    VStack(alignment: .trailing, spacing: 4) {
+                        // Show image if attached
+                        if let imageData = message.imageData, let uiImage = UIImage(data: imageData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: 200, maxHeight: 200)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+
+                        if !message.content.isEmpty &&
+                           message.content != "Here's a photo. What do you see? If it looks like something I want to sell, create a listing for it." {
+                            Text(message.content)
+                                .padding(12)
+                                .background(Color.blue)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+                    }
                 } else {
                     Text(agentAvatar)
                         .font(.title3)

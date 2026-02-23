@@ -5,6 +5,7 @@ struct ChatMessage: Identifiable, Codable {
     let role: Role
     let content: String
     let timestamp: Date
+    var imageData: Data?  // JPEG data if user attached a photo
 
     enum Role: String, Codable {
         case user
@@ -12,10 +13,11 @@ struct ChatMessage: Identifiable, Codable {
         case system
     }
 
-    init(role: Role, content: String) {
+    init(role: Role, content: String, imageData: Data? = nil) {
         self.id = UUID()
         self.role = role
         self.content = content
         self.timestamp = Date()
+        self.imageData = imageData
     }
 }

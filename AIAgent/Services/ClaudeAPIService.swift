@@ -5,6 +5,7 @@ actor LLMService {
     struct Message {
         let role: String
         let content: String?
+        let imageBase64: String?  // base64 JPEG for vision
         let toolCalls: [ToolCall]?
         let toolCallId: String?
         let name: String?
@@ -12,6 +13,16 @@ actor LLMService {
         init(role: String, content: String) {
             self.role = role
             self.content = content
+            self.imageBase64 = nil
+            self.toolCalls = nil
+            self.toolCallId = nil
+            self.name = nil
+        }
+
+        init(role: String, content: String, imageBase64: String) {
+            self.role = role
+            self.content = content
+            self.imageBase64 = imageBase64
             self.toolCalls = nil
             self.toolCallId = nil
             self.name = nil
@@ -20,6 +31,7 @@ actor LLMService {
         init(role: String, content: String?, toolCalls: [ToolCall]?, toolCallId: String?, name: String?) {
             self.role = role
             self.content = content
+            self.imageBase64 = nil
             self.toolCalls = toolCalls
             self.toolCallId = toolCallId
             self.name = name
@@ -27,7 +39,23 @@ actor LLMService {
 
         func toJSON() -> [String: Any] {
             var dict: [String: Any] = ["role": role]
-            if let content { dict["content"] = content }
+
+            // If there's an image, use the multi-part content format
+            if let imageBase64, let content {
+                dict["content"] = [
+                    [
+                        "type": "image_url",
+                        "image_url": ["url": "data:image/jpeg;base64,\(imageBase64)"]
+                    ] as [String: Any],
+                    [
+                        "type": "text",
+                        "text": content
+                    ] as [String: Any]
+                ]
+            } else if let content {
+                dict["content"] = content
+            }
+
             if let toolCalls, !toolCalls.isEmpty {
                 dict["tool_calls"] = toolCalls.map(\.toJSON)
             }
