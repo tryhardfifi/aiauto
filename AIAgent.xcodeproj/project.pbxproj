@@ -28,6 +28,7 @@
 		7BB6A0C58398494155B93447 /* CalendarConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD264D165E9C96EB1881A37 /* CalendarConnectionView.swift */; };
 		83323E9B4F65214589568BF3 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310CE47B648B8FD5E4AC1D2D /* ContactsView.swift */; };
 		8BFF0DC496A84B68C30005DC /* GetLocationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F497968D2FB242F96E362A /* GetLocationTool.swift */; };
+		972ADA902D77C83780F4AF18 /* ListingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC6E97C0B7BE479091ACD6 /* ListingImageView.swift */; };
 		9980B5F9EF19E628D8B503D3 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906C49D09007BCE6E3A80B76 /* OnboardingContainerView.swift */; };
 		A0A5C6FAB46282B041CADE8F /* AIAgentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA22984A3EF54C7B0E44B7E /* AIAgentApp.swift */; };
 		A416B927EB57C6F31D80DD16 /* ActivityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A107CBF0C08A6150BDD1347 /* ActivityListView.swift */; };
@@ -92,6 +93,7 @@
 		CFE537EC49203803DA261A48 /* ReadCalendarTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadCalendarTool.swift; sourceTree = "<group>"; };
 		D1B338A9F97D712CD3677B42 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		EBD264D165E9C96EB1881A37 /* CalendarConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarConnectionView.swift; sourceTree = "<group>"; };
+		F4AC6E97C0B7BE479091ACD6 /* ListingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingImageView.swift; sourceTree = "<group>"; };
 		FEB6E6B19EB82C62146AFC96 /* LocationConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationConnectionView.swift; sourceTree = "<group>"; };
 		FED0FD573A97C8D4B1A92DB8 /* P2PService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PService.swift; sourceTree = "<group>"; };
 		FFC2A4270F69F5828BCAFCD3 /* AgentTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentTool.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				3774261CFB109AC1E4BD47BD /* MainTabView.swift */,
 				D63F5849A40AB042894E0D43 /* Activity */,
 				AA228B0C2CD5F524AB1B00E7 /* Chat */,
+				65CCEF4D38B0753B2AFF0B1B /* Components */,
 				39BD96D4C780FA37577D218E /* Contacts */,
 				8B26A2BF2551591759F9CE56 /* Explore */,
 				33CF331286E2F31453F843DE /* Onboarding */,
@@ -197,6 +200,14 @@
 				719E8623555DFD8A6B5C8125 /* RemindersConnectionView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		65CCEF4D38B0753B2AFF0B1B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F4AC6E97C0B7BE479091ACD6 /* ListingImageView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		7A50CAC58C6522D2153356B8 /* Services */ = {
@@ -328,6 +339,7 @@
 				74BED6C442E8B11B248CF2EC /* ExploreView.swift in Sources */,
 				8BFF0DC496A84B68C30005DC /* GetLocationTool.swift in Sources */,
 				565ECB6893AED6247EE61697 /* Listing.swift in Sources */,
+				972ADA902D77C83780F4AF18 /* ListingImageView.swift in Sources */,
 				75E21C70BAC6F833E489D218 /* LocationConnectionView.swift in Sources */,
 				BDFDEB9A9AD1150A3C11A2A1 /* LocationService.swift in Sources */,
 				ED36D2DA92BA23CFC8B73CD3 /* MainTabView.swift in Sources */,

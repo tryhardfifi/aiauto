@@ -507,20 +507,7 @@ struct ListingPreviewCard: View {
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 10) {
-                // Image or emoji
-                if let imageData = listing.imageData, let uiImage = UIImage(data: imageData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 56, height: 56)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                } else {
-                    Text(listing.category.emoji)
-                        .font(.title2)
-                        .frame(width: 56, height: 56)
-                        .background(Color(.systemGray5))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
+                ListingThumbnailView(listing: listing, size: 56)
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(listing.title)

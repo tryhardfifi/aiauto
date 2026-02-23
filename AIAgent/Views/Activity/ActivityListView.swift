@@ -75,20 +75,7 @@ struct ListingRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Image or category emoji
-            if let imageData = listing.imageData, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 50, height: 50)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            } else {
-                Text(listing.category.emoji)
-                    .font(.system(size: 32))
-                    .frame(width: 50, height: 50)
-                    .background(Color(.systemGray6))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
+            ListingThumbnailView(listing: listing)
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
@@ -170,23 +157,7 @@ struct ListingDetailSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     // Image
-                    if let imageData = listing.imageData, let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: 300)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                    } else {
-                        HStack {
-                            Spacer()
-                            Text(listing.category.emoji)
-                                .font(.system(size: 80))
-                            Spacer()
-                        }
-                        .padding(.vertical, 20)
-                        .background(Color(.systemGray6))
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                    }
+                    ListingImageView(listing: listing, height: 250, cornerRadius: 16)
 
                     // Title + Price
                     HStack(alignment: .top) {

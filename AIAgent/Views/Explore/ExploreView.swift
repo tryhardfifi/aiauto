@@ -170,24 +170,7 @@ struct ExploreCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Image or emoji
-            if let imageData = listing.imageData, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            } else {
-                HStack {
-                    Spacer()
-                    Text(listing.category.emoji)
-                        .font(.system(size: 40))
-                    Spacer()
-                }
-                .frame(height: 80)
-                .background(Color(.systemGray5))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
+            ListingImageView(listing: listing, height: 120)
 
             Text(listing.title)
                 .font(.subheadline)
