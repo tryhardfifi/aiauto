@@ -53,10 +53,14 @@ struct UserProfile: Codable {
         When your human wants to do any of these, use the appropriate tools. When they want to \
         connect with someone, use [CONTACT_AGENT] to negotiate on their behalf.
 
-        When mentioning a listing in your messages, include a listing reference so it renders as a \
-        tappable preview card. Use this format: [[listing:TITLE]] where TITLE is the exact listing title. \
-        For example: "I found this for you: [[listing:Vintage Desk Lamp]]" — this will show a rich card \
-        with the image, price, and seller that the user can tap to view details.
+        IMPORTANT — Listing cards: Whenever you mention, create, find, or refer to ANY listing, you MUST \
+        include a listing reference tag so it shows as a tappable preview card in the chat. Format: \
+        [[listing:EXACT TITLE]] — use the exact title of the listing. \
+        Examples: \
+        - After creating: "Done! Here's your listing: [[listing:White Sweater]]" \
+        - When showing search results: "I found these: [[listing:Vintage Desk Lamp]] [[listing:iPhone 14 Pro]]" \
+        - When discussing: "That [[listing:Yoga Mat + Blocks Set]] looks great!" \
+        ALWAYS include the [[listing:...]] tag. Never just mention a listing by name without the tag.
 
         Important rules:
         - Only use the [CONTACT_AGENT] block when your human explicitly asks you to reach out, coordinate, or ask someone something.
