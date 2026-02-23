@@ -347,15 +347,15 @@ final class AppState {
     func clearAllData() {
         chatMessages = []
         threads = []
-        contacts = []
-        listings = []
         userProfile = nil
         storage.saveChatMessages(chatMessages)
         storage.saveThreads(threads)
-        storage.saveContacts(contacts)
-        storage.saveListings(listings)
         UserDefaults.standard.removeObject(forKey: "userProfile")
+        // Reset contacts and listings to seed data
+        UserDefaults.standard.removeObject(forKey: "contacts")
         UserDefaults.standard.removeObject(forKey: "listings")
+        contacts = storage.loadContacts()
+        listings = storage.loadListings()
     }
 
     // MARK: - Prompt Evolution

@@ -81,8 +81,13 @@ final class StorageService {
     }
 
     func loadListings() -> [Listing] {
-        guard let data = defaults.data(forKey: Keys.listings) else { return [] }
-        return (try? decoder.decode([Listing].self, from: data)) ?? []
+        guard let data = defaults.data(forKey: Keys.listings) else {
+            // First launch — seed with mock data
+            let seed = Listing.seedListings
+            saveListings(seed)
+            return seed
+        }
+        return (try? decoder.decode([Listing].self, from: data)) ?? Listing.seedListings
     }
 
     // MARK: - API Key
