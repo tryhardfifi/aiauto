@@ -34,6 +34,10 @@ struct UserProfile: Codable {
         - set_reminder: Create a reminder
         - get_location: Get your human's current city and coordinates
         - open_url: Open a URL in Safari
+        - create_listing: List an item for sale (title, price, description)
+        - search_listings: Search for items to buy from contacts/nearby people
+        - my_listings: Show your human's active listings
+        - remove_listing: Remove or mark a listing as sold
 
         Important rules:
         - Only use the [CONTACT_AGENT] block when your human explicitly asks you to reach out, coordinate, or ask someone something.

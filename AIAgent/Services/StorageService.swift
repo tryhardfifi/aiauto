@@ -10,6 +10,7 @@ final class StorageService {
         static let chatMessages = "chatMessages"
         static let threads = "threads"
         static let contacts = "contacts"
+        static let listings = "listings"
         static let apiKey = "openAIAPIKey"
         static let availabilityPreferences = "availabilityPreferences"
     }
@@ -69,6 +70,19 @@ final class StorageService {
             return defaults
         }
         return (try? decoder.decode([Contact].self, from: data)) ?? Contact.defaultContacts
+    }
+
+    // MARK: - Listings
+
+    func saveListings(_ listings: [Listing]) {
+        if let data = try? encoder.encode(listings) {
+            defaults.set(data, forKey: Keys.listings)
+        }
+    }
+
+    func loadListings() -> [Listing] {
+        guard let data = defaults.data(forKey: Keys.listings) else { return [] }
+        return (try? decoder.decode([Listing].self, from: data)) ?? []
     }
 
     // MARK: - API Key

@@ -8,6 +8,7 @@ final class AppState {
     var contacts: [Contact] = []
     var chatMessages: [ChatMessage] = []
     var threads: [AgentThread] = []
+    var listings: [Listing] = []
     var isSending = false
     var apiKey: String = ""
     var selectedTab = 0
@@ -38,6 +39,7 @@ final class AppState {
         chatMessages = storage.loadChatMessages()
         threads = storage.loadThreads()
         contacts = storage.loadContacts()
+        listings = storage.loadListings()
         apiKey = storage.loadAPIKey()
         if apiKey.isEmpty && !Secrets.openAIKey.isEmpty {
             apiKey = Secrets.openAIKey
@@ -54,6 +56,19 @@ final class AppState {
         toolRegistry.register(SetReminderTool())
         toolRegistry.register(GetLocationTool())
         toolRegistry.register(OpenURLTool())
+        toolRegistry.register(CreateListingTool())
+        toolRegistry.register(SearchListingsTool())
+        toolRegistry.register(RemoveListingTool())
+        toolRegistry.register(MyListingsTool())
+
+        // Listen for listing creation from tools
+        NotificationCenter.default.addObserver(forName: .listingCreated, object: nil, queue: .main) { [weak self] notif in
+            guard let self, let listing = notif.userInfo?["listing"] as? Listing else { return }
+            Task { @MainActor in
+                self.listings.append(listing)
+                self.storage.saveListings(self.listings)
+            }
+        }
     }
 
     private var toolContext: ToolContext {
@@ -99,6 +114,15 @@ final class AppState {
         if remindersConnectionStatus == .connected {
             let reminders = await calendarService.formattedReminders()
             if !reminders.isEmpty { prompt += "\n\n\(reminders)" }
+        }
+
+        // Marketplace context
+        let activeListings = listings.filter { $0.status == .active }
+        if !activeListings.isEmpty {
+            let listingsSummary = activeListings.map { l in
+                "• \(l.title) — \(String(format: "%.2f %@", l.price, l.currency)) (by \(l.sellerName))"
+            }.joined(separator: "\n")
+            prompt += "\n\nActive marketplace listings:\n\(listingsSummary)"
         }
 
         if locationConnectionStatus == .connected {
