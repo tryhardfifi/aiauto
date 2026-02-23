@@ -16,7 +16,7 @@ struct MainTabView: View {
 
             ActivityListView()
                 .tabItem {
-                    Label("Activity", systemImage: "list.bullet")
+                    Label("Activity", systemImage: "bolt.fill")
                 }
                 .tag(1)
 

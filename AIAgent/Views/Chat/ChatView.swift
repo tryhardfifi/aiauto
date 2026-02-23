@@ -6,6 +6,7 @@ struct ChatView: View {
     @State private var inputText = ""
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var pendingImageData: Data?
+    @State private var selectedListing: Listing?
     @FocusState private var isInputFocused: Bool
 
     var body: some View {
@@ -33,7 +34,14 @@ struct ChatView: View {
                                 ChatBubble(
                                     message: message,
                                     agentAvatar: appState.userProfile?.avatarId ?? "🤖"
-                                )
+                                ) { content in
+                                    // Try to find a matching listing by title
+                                    if let listing = appState.listings.first(where: { l in
+                                        content.lowercased().contains(l.title.lowercased())
+                                    }) {
+                                        selectedListing = listing
+                                    }
+                                }
                                 .id(message.id)
                             }
 
@@ -99,6 +107,9 @@ struct ChatView: View {
                     appState.pendingChatMessage = nil
                     isInputFocused = true
                 }
+            }
+            .sheet(item: $selectedListing) { listing in
+                ListingDetailSheet(listing: listing)
             }
             .onChange(of: selectedPhoto) { _, newItem in
                 Task {
@@ -306,15 +317,32 @@ struct AudioWaveformView: View {
 struct ChatBubble: View {
     let message: ChatMessage
     let agentAvatar: String
+    var onTapListing: ((String) -> Void)?
 
     var body: some View {
         if message.role == .system {
-            HStack {
-                Spacer()
-                Text(message.content)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Spacer()
+            // System messages — tappable if it's a listing action
+            Button {
+                onTapListing?(message.content)
+            } label: {
+                HStack(spacing: 6) {
+                    if message.content.contains("📦") || message.content.contains("🛒") ||
+                       message.content.contains("📅") || message.content.contains("🏠") ||
+                       message.content.contains("🏸") || message.content.contains("👋") ||
+                       message.content.contains("👥") || message.content.contains("🎉") ||
+                       message.content.contains("✅") || message.content.contains("🗑️") {
+                        Image(systemName: "chevron.right")
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                    Text(message.content)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(Color(.systemGray6))
+                .clipShape(Capsule())
             }
             .padding(.horizontal)
         } else {
