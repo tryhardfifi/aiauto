@@ -70,6 +70,19 @@ struct UseCasesView: View {
             }
             .padding(.bottom, 32)
 
+            // Swipe hint
+            HStack(spacing: 4) {
+                Text("Swipe to explore")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Image(systemName: "hand.draw")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .opacity(currentPage == 0 ? 1 : 0)
+            .animation(.easeOut, value: currentPage)
+            .padding(.bottom, 8)
+
             // Pager
             TabView(selection: $currentPage) {
                 ForEach(Array(useCases.enumerated()), id: \.offset) { index, useCase in
