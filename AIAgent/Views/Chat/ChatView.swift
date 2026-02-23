@@ -373,7 +373,7 @@ struct ChatBubble: View {
                     Text(agentAvatar)
                         .font(.title3)
 
-                    Text(message.content)
+                    Text(LocalizedStringKey(message.content))
                         .padding(12)
                         .background(Color(.systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 16))
